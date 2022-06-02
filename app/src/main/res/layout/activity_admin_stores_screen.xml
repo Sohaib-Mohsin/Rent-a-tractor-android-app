@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/all_background_color"
+    tools:context=".Admin.Activities.Admin_Stores_Screen">
+
+    <RelativeLayout
+        android:id="@+id/add_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_5sdp">
+
+        <TextView
+            android:id="@+id/_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:text="Admin Panel"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="@color/green_dark"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/available_Stores"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/_label"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:text="Available Stores"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/black" />
+
+        <ImageView
+            android:id="@+id/create_Store"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_toStartOf="@id/view_all_users"
+            android:contentDescription="Create_Store"
+            android:elevation="@dimen/_2sdp"
+            android:src="@android:drawable/ic_input_add"
+            app:tint="@color/green_dark" />
+
+        <ImageView
+            android:id="@+id/view_all_users"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_toStartOf="@id/notification"
+            android:contentDescription="Create_Store"
+            android:elevation="@dimen/_2sdp"
+            android:src="@drawable/ic_baseline_person_24"
+            app:tint="@color/green_dark" />
+
+        <ImageView
+            android:id="@+id/notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_toStartOf="@id/logout"
+            android:contentDescription="Notification"
+            android:elevation="@dimen/_2sdp"
+            android:src="@drawable/ic_baseline_notifications_none_24" />
+
+        <ImageView
+            android:id="@+id/logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:contentDescription="Logout"
+            android:elevation="@dimen/_2sdp"
+            android:src="@drawable/ic_lock_power_off"
+            app:tint="@android:color/holo_red_light" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_below="@id/available_Stores"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_7sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:background="@color/green_dark" />
+
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/edtSearch"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_below="@id/add_layout"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:background="@drawable/edittext_shadow"
+        android:drawableStart="@drawable/ic_search_black_24dp"
+        android:drawablePadding="15dp"
+        android:hint="Search by Store Name/Location"
+        android:maxLines="1"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="@dimen/_2sdp"
+        android:singleLine="true"
+        android:textColorHint="#8B8E8B" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edtSearch"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/custom_store_items" />
+
+</RelativeLayout>

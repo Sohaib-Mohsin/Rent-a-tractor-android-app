@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_home"
+        android:checked="true"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:iconTint="@color/black"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/nav_store"
+        android:icon="@drawable/ic_baseline_store_24"
+        android:iconTint="@color/black"
+        android:title="Available Stores" />
+
+    <item
+        android:id="@+id/nav_cart"
+        android:icon="@drawable/review_ic"
+        android:iconTint="@color/black"
+        android:title="Rent Bucket" />
+
+    <item
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/ic_person"
+        android:iconTint="@color/black"
+        android:title="My Account" />
+
+</menu>

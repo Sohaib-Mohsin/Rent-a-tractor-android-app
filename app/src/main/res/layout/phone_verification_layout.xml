@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/all_background_color"
+    android:padding="@dimen/_10sdp">
+
+    <TextView
+        android:id="@+id/otp_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:text="Enter OTP sent to +92 3001234567"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/green_dark"
+        android:textStyle="italic" />
+
+    <com.mukesh.OtpView
+        android:id="@+id/otp_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/otp_text"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:inputType="number"
+        android:itemBackground="@color/green_dark"
+        android:textColor="@android:color/white"
+        app:OtpItemCount="6"
+        app:OtpItemHeight="@dimen/_30sdp"
+        app:OtpItemSpacing="@dimen/_6sdp"
+        app:OtpItemWidth="@dimen/_30sdp"
+        app:OtpLineColor="@color/green_accent"
+        app:OtpViewType="line" />
+
+    <Button
+        android:id="@+id/verifyNow"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_below="@id/otp_view"
+        android:layout_marginStart="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_40sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:background="@drawable/button_bg1"
+        android:fontFamily="sans-serif-medium"
+        android:text="Verify OTP Now"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/white" />
+
+</RelativeLayout>

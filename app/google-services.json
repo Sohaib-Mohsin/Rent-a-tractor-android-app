@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "947628437313",
+    "project_id": "rent-a-tractor-app",
+    "storage_bucket": "rent-a-tractor-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:947628437313:android:9f4e44022bcb14af187bc0",
+        "android_client_info": {
+          "package_name": "com.tractor.rentatractorapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "947628437313-8etohnln1ho8oef11so71o2bg7jk1ks4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAty6zWnDxxDpj82in2E2SBAu4giXa3Qjc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "947628437313-8etohnln1ho8oef11so71o2bg7jk1ks4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
