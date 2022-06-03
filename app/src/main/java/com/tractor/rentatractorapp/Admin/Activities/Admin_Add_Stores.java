@@ -1,15 +1,14 @@
 package com.tractor.rentatractorapp.Admin.Activities;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -57,7 +56,7 @@ public class Admin_Add_Stores extends AppCompatActivity {
             } else if (imageUriCrop == null) {
                 Toast.makeText(Admin_Add_Stores.this, "Store Image is required", Toast.LENGTH_SHORT).show();
             } else {
-                dialog = new Display_Dialog(Admin_Add_Stores.this, "Adding "+Store_title);
+                dialog = new Display_Dialog(Admin_Add_Stores.this, "Adding " + Store_title);
                 dialog.display_now();
                 StorageReference storageReference = FirebaseStorage.getInstance().getReference(Variables.Store_Images).child(FirebaseAuth.getInstance().getCurrentUser().getUid());
                 storageReference.child(String.valueOf(System.currentTimeMillis())).putFile(imageUriCrop).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -99,15 +98,22 @@ public class Admin_Add_Stores extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == 786 && resultCode == RESULT_OK && data!=null){
-            String location = data.getStringExtra("LOCATION");
-            binding.storeLocation.setText(location);
+        if (requestCode == 786 && resultCode == RESULT_OK && data != null) {
+            try {
+                String location = data.getStringExtra("LOCATION");
+                binding.storeLocation.setText(location);
+
+            } catch (Exception ex) {
+                Toast.makeText(this, "Unable to get location", Toast.LENGTH_SHORT).show();
+            }
         }
 
         if (resultCode == RESULT_OK && data != null) {
             imageUriCrop = data.getData();
             binding.storeImage.setImageURI(imageUriCrop);
-            binding.addStoreImage.setText("Change Image");
+            if (imageUriCrop != null) {
+                binding.addStoreImage.setText("Change Image");
+            }
         }
 
 

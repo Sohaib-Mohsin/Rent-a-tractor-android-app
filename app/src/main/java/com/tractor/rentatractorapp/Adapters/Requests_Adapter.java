@@ -229,6 +229,11 @@ public class Requests_Adapter extends RecyclerView.Adapter<Requests_Adapter.view
                                                         @Override
                                                         public void onComplete(@NonNull Task<Void> task) {
                                                             if (task.isSuccessful()) {
+
+                                                                requests_modelsArrayList.remove(holder.getAdapterPosition());
+                                                                notifyItemRemoved(holder.getAdapterPosition());
+                                                                notifyDataSetChanged();
+
                                                                 getToken("Rent Request Rejected",requests_models.getFrom() , "R_Img");
                                                                 dialog.dismiss();
                                                                 Toast.makeText(context, "Request Removed", Toast.LENGTH_SHORT).show();

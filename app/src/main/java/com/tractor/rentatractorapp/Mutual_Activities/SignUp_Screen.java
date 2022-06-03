@@ -26,6 +26,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.mukesh.OtpView;
 import com.tractor.rentatractorapp.Helpers.Current_Login_Status;
+import com.tractor.rentatractorapp.Helpers.Display_Dialog;
 import com.tractor.rentatractorapp.Models.View_users;
 import com.tractor.rentatractorapp.R;
 import com.tractor.rentatractorapp.User.Activities.MainActivity;
@@ -42,8 +43,8 @@ public class SignUp_Screen extends AppCompatActivity {
     ActivitySignUpScreenBinding binding;
     String VerificationID;
     AlertDialog alertDialog;
-    ProgressDialog progressDialog;
     boolean verified = false;
+    private Display_Dialog display_dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +54,7 @@ public class SignUp_Screen extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
         databaseReference = FirebaseDatabase.getInstance().getReference("All_Users");
-        progressDialog = new ProgressDialog(SignUp_Screen.this);
-        progressDialog.setCancelable(false);
-        progressDialog.setMessage("Sending Phone Verification Code...");
+        display_dialog = new Display_Dialog(SignUp_Screen.this, "Sending Verification Code");
 
         binding.gotoLogin.setOnClickListener(view -> {
             startActivity(new Intent(SignUp_Screen.this, Login_Screen.class));
@@ -76,7 +75,7 @@ public class SignUp_Screen extends AppCompatActivity {
 
     private void sendCode(String number) {
 
-        progressDialog.show();
+         display_dialog.display_now();
 
         PhoneAuthOptions options = PhoneAuthOptions.newBuilder(firebaseAuth).setPhoneNumber(number)
                 .setTimeout(60L, TimeUnit.SECONDS)
@@ -95,7 +94,7 @@ public class SignUp_Screen extends AppCompatActivity {
                     public void onCodeSent(@NonNull String verifyID, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                         super.onCodeSent(verifyID, forceResendingToken);
 
-                        progressDialog.dismiss();
+                        display_dialog.dismiss_now();
 
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(SignUp_Screen.this, R.style.material);
@@ -136,13 +135,13 @@ public class SignUp_Screen extends AppCompatActivity {
                         Verify.setOnClickListener(view -> {
 
                             if (verified) {
-                                progressDialog.setMessage("Registering...");
-                                progressDialog.show();
+                                display_dialog = new Display_Dialog(SignUp_Screen.this, "Registering ...");
+                                display_dialog.display_now();
 
                                 Create_User_and_Save_to_DB(number);
 
                             } else {
-                                progressDialog.dismiss();
+                                display_dialog.dismiss_now();
                                 Toast.makeText(SignUp_Screen.this, "Error in Verifying Phone Number", Toast.LENGTH_SHORT).show();
                             }
 
@@ -165,20 +164,22 @@ public class SignUp_Screen extends AppCompatActivity {
 
                         databaseReference.child(firebaseAuth.getCurrentUser().getUid()).setValue(view_users).addOnCompleteListener(task1 -> {
                             if (task1.isSuccessful()) {
-                                progressDialog.dismiss();
+                                display_dialog.dismiss_now();
+
                                 Toast.makeText(SignUp_Screen.this, "Login to continue!", Toast.LENGTH_SHORT).show();
                                 firebaseAuth.signOut();
                                 startActivity(new Intent(SignUp_Screen.this, Login_Screen.class));
                                 finish();
 
                             } else {
-                                progressDialog.dismiss();
+                                display_dialog.dismiss_now();
+
                                 Toast.makeText(SignUp_Screen.this, task1.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
 
                     } else {
-                        progressDialog.dismiss();
+                        display_dialog.dismiss_now();
 
                         Toast.makeText(SignUp_Screen.this, task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                     }

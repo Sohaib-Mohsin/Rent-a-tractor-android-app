@@ -99,21 +99,13 @@ public class HomeFragment extends Fragment {
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialog.getWindow().getAttributes().gravity = Gravity.TOP | Gravity.CENTER;
 
-            customLogoutDialogBinding.keepUsing.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    dialog.dismiss();
-                }
-            });
+            customLogoutDialogBinding.keepUsing.setOnClickListener(view1 -> dialog.dismiss());
 
-            customLogoutDialogBinding.logout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    FirebaseAuth.getInstance().signOut();
-                    Current_Login_Status.Save_Login(getContext(), "none");
-                    startActivity(new Intent(getContext(), Login_Screen.class));
-                    getActivity().finish();
-                }
+            customLogoutDialogBinding.logout.setOnClickListener(view12 -> {
+                FirebaseAuth.getInstance().signOut();
+                Current_Login_Status.Save_Login(getContext(), "none");
+                startActivity(new Intent(getContext(), Login_Screen.class));
+                getActivity().finish();
             });
 
             dialog.show();

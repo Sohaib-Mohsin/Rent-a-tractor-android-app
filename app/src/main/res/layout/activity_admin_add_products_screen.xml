@@ -152,7 +152,7 @@
                 android:paddingBottom="10dp"
                 android:inputType="textMultiLine|textCapSentences"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/black"
+                android:textColor="@color/green_dark"
                 android:textColorHint="#8B8E8B"
                 android:textStyle="bold" />
 

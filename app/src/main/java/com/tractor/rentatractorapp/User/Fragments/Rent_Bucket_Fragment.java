@@ -9,14 +9,11 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,7 +26,6 @@ import com.tractor.rentatractorapp.R;
 import com.tractor.rentatractorapp.databinding.FragmentRentBucketBinding;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Rent_Bucket_Fragment extends Fragment {
 
@@ -58,27 +54,10 @@ public class Rent_Bucket_Fragment extends Fragment {
         Title_msg = v.findViewById(R.id.request_status);
         Close = v.findViewById(R.id.close);
 
-        Close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                FirebaseDatabase.getInstance().getReference(Variables.Rent_Requests).child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                        .removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    dialog.dismiss();
-                                } else {
-                                    Toast.makeText(getContext(), Objects.requireNonNull(task.getException()).getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                                    dialog.dismiss();
-                                }
-                            }
-                        });
-
-            }
-        });
+        Close.setOnClickListener(view -> dialog.dismiss());
 
         getReviewItems();
+
         Check_Request();
 
         return binding.getRoot();

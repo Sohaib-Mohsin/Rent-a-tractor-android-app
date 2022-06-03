@@ -13,6 +13,7 @@ import android.provider.Settings;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -55,13 +56,7 @@ public class Maps_Screen extends FragmentActivity implements OnMapReadyCallback 
 
     private void Choose_Location() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
+
             return;
         }
         mMap.setMyLocationEnabled(true);
@@ -78,7 +73,7 @@ public class Maps_Screen extends FragmentActivity implements OnMapReadyCallback 
 
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
-            public void onMapClick(LatLng latLng) {
+            public void onMapClick(@NonNull LatLng latLng) {
                 MarkerOptions markerOptions = new MarkerOptions();
                 markerOptions.position(latLng);
                 markerOptions.title(getAddress(latLng));
@@ -88,10 +83,15 @@ public class Maps_Screen extends FragmentActivity implements OnMapReadyCallback 
                 mMap.addMarker(markerOptions);
                 mMap.getUiSettings().setMyLocationButtonEnabled(false);
 
-                Intent intent = new Intent();
-                intent.putExtra("LOCATION", getAddress(latLng));
-                setResult(RESULT_OK, intent);
-                finish();
+                try {
+                    Intent intent = new Intent();
+                    intent.putExtra("LOCATION", getAddress(latLng));
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }
+                catch (Exception ex){
+                    Toast.makeText(Maps_Screen.this, "Unable to pick Location", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
